@@ -25,7 +25,7 @@ services:
       MYSQL_ROOT_HOST: ${MY_SQL_ROOT_HOST}
     volumes:
       - mysql-data:/data/db
-      - "./todo-list-back/db/config.db.sql:/docker-entrypoint-initdb.d/config.db.sql"
+      - "./simplytodo-api/db/config.db.sql:/docker-entrypoint-initdb.d/config.db.sql"
   simplytodo:
     container_name: ${SIMPLYTODO}
     image: ${SIMPLYTODO}
