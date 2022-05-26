@@ -1,0 +1,55 @@
+version: "3"
+
+networks:
+  simplytodoapp:
+    driver: bridge
+
+services:
+  simplytodo-db:
+    container_name: ${SIMPLYTODO_DB}
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    expose:
+      - "${MY_SQL_PORT}"
+    ports:
+      - "${MY_SQL_PORT}:${MY_SQL_PORT}"
+    networks:
+      - ${SIMPLYTODO_NETWORK}
+    environment:
+      MYSQL_DATABASE: ${MY_SQL_DATABASE}
+      MYSQL_ALLOW_EMPTY_PASSWORD: ${MY_SQL_ALLOW_EMPTY_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MY_SQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MY_SQL_USER}
+      MYSQL_PASSWORD: ${MY_SQL_PASSWORD}
+      MYSQL_ROOT_HOST: ${MY_SQL_ROOT_HOST}
+    volumes:
+      - mysql-data:/data/db
+      - "./todo-list-back/db/config.db.sql:/docker-entrypoint-initdb.d/config.db.sql"
+  simplytodo:
+    container_name: ${SIMPLYTODO}
+    image: ${SIMPLYTODO}
+    build:
+      context: ./todo-list-front
+      dockerfile: Dockerfile
+    ports:
+      - "${SIMPLYTODO_PORT}:${SIMPLYTODO_PORT}"
+    networks:
+      - ${SIMPLYTODO_NETWORK}
+  simplytodo-api:
+    container_name: ${SIMPLYTODO_API}
+    depends_on:
+      - ${SIMPLYTODO_DB}
+    image: ${SIMPLYTODO_API}
+    build:
+      context: ./todo-list-back
+      dockerfile: Dockerfile
+    restart: always
+    command: bash -c 'while !</dev/tcp/simplytodo-db/${MY_SQL_PORT}; do sleep 1; done; npm start'
+    ports:
+      - "${SIMPLYTODO_API_PORT}:${SIMPLYTODO_API_PORT}"
+    networks:
+      - ${SIMPLYTODO_NETWORK}
+volumes:
+  mysql-data:
+    driver: local
