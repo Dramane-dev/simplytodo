@@ -1,5 +1,5 @@
 FROM node:16-alpine as angular-build
-WORKDIR /todo-list-front
+WORKDIR /simplytodo-front
 COPY ./package.json ./
 RUN npm install --legacy-peer-deps
 COPY . .
@@ -10,4 +10,4 @@ EXPOSE 5001
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=angular-build /todo-list-front/dist/todo-list-front .
+COPY --from=angular-build /simplytodo-front/dist/simplytodo-front .

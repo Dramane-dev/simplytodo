@@ -30,7 +30,7 @@ services:
     container_name: ${SIMPLYTODO}
     image: ${SIMPLYTODO}
     build:
-      context: ./todo-list-front
+      context: ./simplytodo-front
       dockerfile: Dockerfile
     ports:
       - "${SIMPLYTODO_PORT}:${SIMPLYTODO_PORT}"
@@ -42,7 +42,7 @@ services:
       - ${SIMPLYTODO_DB}
     image: ${SIMPLYTODO_API}
     build:
-      context: ./todo-list-back
+      context: ./simplytodo-api
       dockerfile: Dockerfile
     restart: always
     command: bash -c 'while !</dev/tcp/simplytodo-db/${MY_SQL_PORT}; do sleep 1; done; npm start'
