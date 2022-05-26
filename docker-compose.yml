@@ -1,9 +1,6 @@
 version: "3.8"
 
 networks:
-  default:
-    external:
-      name: nginx-rp-gateway
   simplytodoapp:
     driver: bridge
 
@@ -53,6 +50,22 @@ services:
       - "${SIMPLYTODO_API_PORT}:${SIMPLYTODO_API_PORT}"
     networks:
       - ${SIMPLYTODO_NETWORK}
+  nginx-rp-gateway:
+    container_name: nginx-rp-gateway
+    hostname: nginx-rp-gateway
+    image: nginx:1.20-alpine
+    depends_on:
+      -  simplytodo
+      -  simplytodo-api
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - simplytodoapp
+    volumes:
+      - ./conf/:/etc/nginx/conf.d/
+      - ./html:/var/www/dramane.dev/nginx-reverse-proxy-gateway/html
+      - /etc/letsencrypt:/etc/letsencrypt 
 volumes:
   mysql-data:
     driver: local
