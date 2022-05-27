@@ -12,3 +12,10 @@ CMD [ "npm", "start" ]
 # RUN rm -rf ./*
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
 # COPY --from=angular-build /simplytodo-front/dist/simplytodo-front .
+
+FROM nginx:alpine
+EXPOSE 5001
+COPY --from=angular-build /simplytodo-front/dist/simplytodo-front /usr/share/nginx/html
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+CMD ["nginx", "-g", "daemon off;"]
