@@ -11,3 +11,4 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=angular-build /simplytodo-front/dist/simplytodo-front .
+CMD ["nginx", "-g", "daemon off;"]
