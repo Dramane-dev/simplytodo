@@ -6,11 +6,17 @@ COPY . .
 RUN npm run buildProd
 
 FROM nginx:alpine
-EXPOSE 5001
-WORKDIR /usr/share/nginx/html
-RUN rm -rf ./*
+RUN rm -rf /etc/nginx/conf.d/*
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=angular-build /simplytodo-front/dist/simplytodo-front .
+CMD ["nginx", "-g", "daemon off;"]
+
+# FROM nginx:alpine
+# EXPOSE 5001
+# WORKDIR /usr/share/nginx/html
+# RUN rm -rf ./*
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
+# COPY --from=angular-build /simplytodo-front/dist/simplytodo-front .
 
 # FROM nginx:alpine
 # EXPOSE 5001
