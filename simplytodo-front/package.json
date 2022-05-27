@@ -5,6 +5,7 @@
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
+        "buildProd": "ng build --base-href 'https://dramane.dev/simplytodo/'",
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
         "prettier": "prettier --check .",
