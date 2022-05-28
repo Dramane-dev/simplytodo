@@ -24,11 +24,11 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { ConfirmedMailComponent } from './pages/confirmed-mail/confirmed-mail.component';
 import { CustomTranslateLoader } from './translate/customTranslateLoader';
 
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-    let customTranlateLoader = new CustomTranslateLoader(http);
-    customTranlateLoader.getTranslation("fr").subscribe((data) => console.log(data));
-    return new TranslateHttpLoader(http, "../assets/i18n/", ".json");
-}
+// export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+//     let customTranlateLoader = new CustomTranslateLoader(http);
+//     customTranlateLoader.getTranslation("fr").subscribe((data) => console.log(data));
+//     return new TranslateHttpLoader(http, "../assets/i18n/", ".json");
+// }
 
 @NgModule({
     declarations: [
