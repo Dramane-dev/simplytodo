@@ -24,7 +24,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { ConfirmedMailComponent } from './pages/confirmed-mail/confirmed-mail.component';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-    return new TranslateHttpLoader(http);
+    return new TranslateHttpLoader(http, "../assets/i18n/", ".json");
 }
 
 @NgModule({
