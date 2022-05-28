@@ -7,6 +7,7 @@ export class CustomTranslateLoader implements TranslateLoader {
     constructor(private _http: HttpClient) {}
 
     getTranslation(lang: string): Observable<Object> {
+        console.log('custom loader started');
         return this._http.get(this._baseUrl + lang + ".json");
     }
 }
