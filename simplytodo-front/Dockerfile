@@ -8,7 +8,7 @@ RUN npm run buildProd
 FROM nginx:alpine
 RUN rm -rf /etc/nginx/conf.d/*
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY --from=angular-build /simplytodo-front/dist/simplytodo-front .
+COPY --from=angular-build /simplytodo-front/dist/simplytodo-front /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"]
 
 # FROM nginx:alpine
