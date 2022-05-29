@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -24,12 +23,6 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { ConfirmedMailComponent } from './pages/confirmed-mail/confirmed-mail.component';
 import { CustomTranslateLoader } from './translate/customTranslateLoader';
 
-// export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-//     let customTranlateLoader = new CustomTranslateLoader(http);
-//     customTranlateLoader.getTranslation("fr").subscribe((data) => console.log(data));
-//     return new TranslateHttpLoader(http, "../assets/i18n/", ".json");
-// }
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -50,13 +43,6 @@ import { CustomTranslateLoader } from './translate/customTranslateLoader';
         BrowserAnimationsModule,
         AppRoutingModule,
         HttpClientModule,
-        // TranslateModule.forRoot({
-        //     loader: {
-        //         provide: TranslateLoader,
-        //         useFactory: HttpLoaderFactory,
-        //         deps: [HttpClient],
-        //     },
-        // }),
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
