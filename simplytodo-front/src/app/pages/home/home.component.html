@@ -7,11 +7,14 @@
             [bottomRight]="ball.property === 'bottomRight'"
         ></app-ball>
     </ng-container>
+    <!-- <mat-icon class="row" aria-hidden="false" aria-label="Row to back home">login</mat-icon>
+    <mat-icon class="row" aria-hidden="false" aria-label="Row to back home">logout</mat-icon>
+    <mat-icon class="row" aria-hidden="false" aria-label="Row to back home">menu</mat-icon> -->
     <h1 class="banner-title">{{ "Pages.Home.Title" | translate }}</h1>
-    <div class="banner-subtitle">
+    <div [ngClass]="handsetScreen ? 'banner-subtitle-handset-screen' : 'banner-subtitle'">
         <p>{{ "Pages.Home.SubTitle" | translate }}</p>
     </div>
-    <div class="buttons-container">
+    <div [ngClass]="handsetScreen ? 'buttons-container-handset-screen' : 'buttons-container'">
         <div class="get-started-button" (click)="userIsLogged() ? navigateTo('/dashboard') : navigateTo('/signin')">
             <p class="content">{{ "Pages.Home.Buttons.GetStartedButton" | translate }}</p>
         </div>

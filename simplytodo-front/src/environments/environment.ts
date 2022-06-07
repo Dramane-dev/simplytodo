@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    globalBackendUrl: 'http://localhost:3000/api/',
+    globalBackendUrl: 'http://dramane.dev/simplytodo/api/',
 };
 
 /*
